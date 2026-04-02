@@ -27,13 +27,11 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 10
+          version: 9
           run_install: false
 
       - name: Deploy Backend for ${{ github.ref_name }}
         run: |        
-          echo 'onlyBuiltDependencies=*' > ~/.npmrc
-          pnpm config set enable-pre-post-scripts true
           export use_worker_assets=${{ secrets.USE_WORKER_ASSETS }}
           export use_worker_assets_with_telegram=${{ secrets.USE_WORKER_ASSETS_WITH_TELEGRAM }}
           
