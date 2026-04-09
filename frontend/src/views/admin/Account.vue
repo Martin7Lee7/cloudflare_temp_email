@@ -7,10 +7,12 @@ import { useGlobalState } from '../../store'
 import { api } from '../../api'
 import { NButton, NMenu } from 'naive-ui';
 import { MenuFilled } from '@vicons/material'
+import { utcToLocalDate } from '../../utils'
 
 const {
     loading, adminTab, openSettings,
-    adminMailTabAddress, adminSendBoxTabAddress
+    adminMailTabAddress, adminSendBoxTabAddress,
+    useUTCDate
 } = useGlobalState()
 const message = useMessage()
 
@@ -315,11 +317,17 @@ const columns = [
     },
     {
         title: t('created_at'),
-        key: "created_at"
+        key: "created_at",
+        render(row) {
+            return utcToLocalDate(row.created_at, useUTCDate.value)
+        }
     },
     {
         title: t('updated_at'),
-        key: "updated_at"
+        key: "updated_at",
+        render(row) {
+            return utcToLocalDate(row.updated_at, useUTCDate.value)
+        }
     },
     {
         title: t('source_meta'),
